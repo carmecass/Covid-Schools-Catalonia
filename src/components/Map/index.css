@@ -1,0 +1,9 @@
+#map {
+  display: block;
+  width: 50vw;
+  height: 100vh;
+  margin-left: 25px;
+}
+.marker {
+  size: 50px
+}

@@ -1,0 +1,62 @@
+.section {
+  width: 400px;
+  z-index: 100;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #0099ff80;
+  border-radius: 5px;
+}
+.search {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #0099ff80;
+  border-radius: 5px;
+}
+.select {
+  width: 400px;
+  height: 30px;
+  border: none;
+  background-color: #f4f5f780;
+}
+::-webkit-input-placeholder {
+  text-transform: initial;
+}
+input {
+  outline: none;
+  text-transform: capitalize
+}
+.svg_search {
+  display: flex;
+  border: none;
+  text-align: right;
+  background-color: #f4f5f780;
+  padding-top: 4px;
+}
+ul  {
+  margin: 0px;
+  padding: 0px;
+}
+li {
+  width: 400px;
+  list-style:none;
+  text-align: left;
+  margin: 10px 0px;
+  box-shadow: 1px 3px 0 #d4d9e1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+li:hover {
+  background-color: #0099ff90;
+  color: white;
+}
+.school_name {
+  font-size: medium;
+  margin: 5px 2px 2px 5px;
+  padding-top: 5px;
+}
+.school_address {
+  margin: 0px 0px 0px 5px;
+  padding-bottom: 5px;
+}

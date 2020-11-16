@@ -1,0 +1,126 @@
+.schoolmain {
+  width: 80vw;
+  height: 100vh;
+}
+.headers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0px 10px 0px;
+}
+.address {
+  text-align: left;
+}
+h3{
+  margin: 0px 5px 5px 5px;
+}
+.street {
+  font-size: 18px;
+  margin: 0px 0px 0px 5px;
+  padding: 0px;
+}
+.city{
+  font-size: 14px;
+  margin: 5px;
+  padding: 0px;
+}
+.button_school {
+  display: flex;
+  flex-direction: row;
+  background-color: #0099ff30;
+  color: #0099ff;
+  border: 2px solid #0099ff40;
+  border-radius: 5px;
+  height: 35px;
+  width: 100%;
+  margin-bottom: 15px;
+  justify-content: center;
+  cursor: pointer;
+}
+.button_school p {
+  font-size: 16px;
+  margin-top: 6px;
+  justify-items: center;
+  align-items: center;
+}
+.svg_arrow {
+ margin: 2px;
+}
+.update_date{
+  flex-direction: column;
+}
+.update_date p {
+  margin: 5px 5px 5px 10px;
+  text-align: right;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.container_info {
+  width: 50%;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+}
+.centers_school {
+  display: flex;
+  flex-direction: column; 
+  padding: 5px 10px;
+  border: 2px solid #0099ff;
+  border-radius: 10px;
+  box-shadow: 3px 3px #0099ff80;
+  width: 180px;
+  height: 70px;
+  justify-content: space-between;
+}
+h5 {
+  margin: 5px 10px 5px 0px;
+}
+.big_number {
+  font-size: 26px;
+  margin: 0px 0px 10px 0px;
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.centers_school1 {
+  border: 2px solid #0099ff;
+  border-radius: 10px;
+  box-shadow: 3px 3px #0099ff80;
+  margin: 10px 0px;
+  padding: 5px 13px;
+  height: 140px;
+}
+.line_text span { 
+  background: white; 
+  padding: 0 10px; 
+}
+pre span, .big_number {
+  font-weight: bold;
+  color: rgb(13, 196, 7);
+}
+.total_school {
+  font-weight: bold;
+  color: rgb(13, 196, 7);
+  margin: 0px 0px 0px 0px;
+  font-size: 26px;
+  text-align: left
+  ;
+}
+.school_confined {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.school_confined p {
+  margin: 10px 0px 0px 0px;
+}
+.little_word_school {
+  margin: 5px 0px 5px 0px;
+}

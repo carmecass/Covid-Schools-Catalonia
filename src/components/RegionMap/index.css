@@ -1,0 +1,57 @@
+.mysection {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0px;
+}
+.title {
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+.centers_map {
+  max-height: 131px;
+  padding: 5px 10px;
+  border: 2px solid #0099ff;
+  border-radius: 10px;
+  box-shadow: 3px 3px #0099ff80;
+}
+#mapRegion {
+  overflow: auto;
+  position: relative;
+  margin-left: 50px;
+}
+svg path:hover {
+  stroke: black;
+}
+#tooltip {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: auto;
+  width: auto;
+  background-color:white;
+  color: grey;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(228, 222, 222);
+  border-radius: 5px;
+  font-size: 10px;
+  font-family: 'Open Sans', sans-serif;
+  padding: 8px;
+}
+#tooltip::after {
+  content:'';
+  position:absolute;
+  bottom: -16%;
+	left: middle;
+  width:15px; height:15px;
+  background:inherit;
+  transform:rotate(45deg);
+  border-bottom: 1px solid rgb(228, 222, 222);
+  border-right: 1px solid rgb(228, 222, 222);
+}
+#regionName {
+  font-weight: bold;
+}
+.info_map {
+  margin-left: 120px;
+}
