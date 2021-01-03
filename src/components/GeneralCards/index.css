@@ -101,3 +101,14 @@ pre span, .total {
   margin-right: 100px;
   margin-top: 10px;
 }
+.p_error {
+  display: flex;
+  width: 90%;
+  margin: 0px;
+  padding: 10px 0px 10px 0px;
+  font-size: 20px;
+  color: red;
+  background-color: rgb(253, 230, 230);
+  justify-content: center;
+  vertical-align: middle;
+}

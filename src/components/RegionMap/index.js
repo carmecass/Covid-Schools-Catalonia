@@ -15,7 +15,7 @@ export default function RegionMap(props) {
   useEffect(() => {
     (async () => {
       try {
-        let results = api.getBackgroundRegionsMap();
+        let results = await api.getBackgroundRegionsMap();
         setInfoMap(results);
       } catch (error) {
         throw error;
@@ -24,21 +24,19 @@ export default function RegionMap(props) {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      try {
-        if (idPath && idPath.length !== 0) {
-          infoMap.data.map(school => {
-            if (idPath === school.codeRegion) {
-              setInfoHover(school);
-            }
-            return school;
-          });
-        }
-      } catch (error) {
-        throw error;
+    try {
+      if (idPath && idPath.length !== 0) {
+        infoMap.data.map(school => {
+          if (idPath === school.codeRegion) {
+            setInfoHover(school);
+          }
+          return school;
+        });
       }
-    })();
-  }, [idPath]);
+    } catch (error) {
+      throw error;
+    }
+  }, [idPath, infoMap.data]);
 
   const handleMouseOver = e => {
     e.preventDefault();

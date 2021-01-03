@@ -4,10 +4,8 @@ const { REACT_APP_URL, REACT_APP_SCHOOLS } = process.env;
 
 const today = new Date();
 let formatDateToday = today.toISOString().slice(0, 10);
-
 const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
 let formatDateYesterday = yesterday.toISOString().slice(0, 10);
-
 const beforeYesterday = new Date(today.getTime() - 48 * 60 * 60 * 1000);
 let formatDateBeforeYesterday = beforeYesterday.toISOString().slice(0, 10);
 let day = new Date().getDay();
@@ -324,21 +322,21 @@ const api = {
     }
   },
 
-  async getSchoolsRegions(query) {
+  async getSchoolsByRegions(query, sortConfig) {
     const { city, name } = query;
-
     try {
       const resSchools = await fetch(
         `${REACT_APP_SCHOOLS}?nom_municipi=${city}&$limit=5200`
       );
       let resultsSchools = await resSchools.json();
-
       const schoolsInfo = resultsSchools.reduce((acc, item) => {
         if (item.denominaci_completa !== name) {
           acc.push({
             name: item.denominaci_completa,
             codcentre: item.codi_centre,
-            city: item.nom_municipi
+            city: item.nom_municipi,
+            address: item.adre_a,
+            region: item.nom_comarca
           });
           return acc;
         } else return acc;
@@ -346,7 +344,6 @@ const api = {
 
       let retrievedObject = localStorage.getItem("allCovidSchools") || "";
       let results = JSON.parse(retrievedObject);
-
       let infoRegionSchools = schoolsInfo.map(school => {
         const covidSchool = results.find(
           ({ codcentre }) => school.codcentre === codcentre
@@ -355,18 +352,27 @@ const api = {
           ...school,
           estat: covidSchool.estat,
           grup_confin: covidSchool.grup_confin,
-          alumn_confin: parseInt(covidSchool.alumn_confin),
-          docent_confin: parseInt(covidSchool.docent_confin),
-          altres_confin: parseInt(covidSchool.altres_confin),
-          alumn_positiu_vig11: parseInt(covidSchool.alumn_positiu_vig11),
-          personal_positiu_vig11: parseInt(covidSchool.personal_positiu_vig11),
-          altres_positiu_vig11: parseInt(covidSchool.altres_positiu_vig11)
+          person_confin:
+            parseInt(covidSchool.alumn_confin) +
+            parseInt(covidSchool.docent_confin) +
+            parseInt(covidSchool.altres_confin),
+          positius:
+            parseInt(covidSchool.alumn_positiu_vig11) +
+            parseInt(covidSchool.personal_positiu_vig11) +
+            parseInt(covidSchool.altres_positiu_vig11)
         };
       });
-
-      infoRegionSchools = infoRegionSchools.sort((a, b) =>
-        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-      );
+      if (sortConfig !== null) {
+        infoRegionSchools.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === "ascending" ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === "ascending" ? 1 : -1;
+          }
+          return 0;
+        });
+      }
       return infoRegionSchools;
     } catch (error) {
       throw error;
@@ -380,8 +386,8 @@ const api = {
       );
       let resultsSchoolsRegion = await resRegionSchool.json();
 
-      let regionName = await resultsSchoolsRegion[0].nom_comarca;
-      let totalRegionSchools = await resultsSchoolsRegion.length;
+      let regionName = resultsSchoolsRegion[0].nom_comarca;
+      let totalRegionSchools = resultsSchoolsRegion.length;
 
       let retrievedObject = localStorage.getItem("allCovidSchools") || "";
       let results = JSON.parse(retrievedObject);
@@ -395,6 +401,7 @@ const api = {
         if (filterResults !== undefined && filterResults.estat === "Confinat") {
           totalCovidRegion += 1;
         }
+        return school;
       });
 
       return { totalRegionSchools, regionName, totalCovidRegion };
@@ -405,13 +412,22 @@ const api = {
 
   getBackgroundRegionsMap() {
     try {
+      let covidResults = [];
+      let infoResults = [];
+
       const retrievedCovidLocalStorage =
         localStorage.getItem("allCovidSchools") || "";
-      const covidResults = JSON.parse(retrievedCovidLocalStorage);
-
+      if (retrievedCovidLocalStorage.length > 0) {
+        covidResults = JSON.parse(retrievedCovidLocalStorage);
+      }
       const retrievedInfoLocalStorage =
         localStorage.getItem("allInfoSchools") || "";
-      const infoResults = JSON.parse(retrievedInfoLocalStorage);
+      if (
+        retrievedInfoLocalStorage !== undefined ||
+        retrievedInfoLocalStorage !== null
+      ) {
+        infoResults = JSON.parse(retrievedInfoLocalStorage);
+      }
 
       const tempResults = covidResults.map(x => {
         const y = infoResults.find(y => y.codcentre === x.codcentre);
@@ -437,7 +453,7 @@ const api = {
         return a;
       }, []);
 
-      const centerCovid = [];
+      let centerCovid = [];
       data.map(item => {
         if (item.totalCovidRegion === 1) {
           document.getElementById(item.codeRegion).style.fill = "#edbced";
@@ -453,7 +469,12 @@ const api = {
         }
         return item;
       });
-      const maxCovid = Math.max(...centerCovid);
+
+      let maxCovid = Math.max(...centerCovid);
+
+      if (maxCovid === -Infinity) {
+        maxCovid = "max";
+      }
 
       return { data, maxCovid };
     } catch (error) {

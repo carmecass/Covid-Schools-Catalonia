@@ -4,11 +4,13 @@ import "./index.css";
 import Map from "../Map/index";
 import { useLocation } from "wouter";
 import Layout from "../Layout/index";
+import RegionSchools from "../RegionSchools";
 
 export default function SchoolCards(props) {
   const [infoCard, setInfoCard] = useState("");
   const [, pushLocation] = useLocation();
   const [localStore, setLocalStore] = useState({});
+  const [error, setError] = useState(false);
 
   const {
     params: { id }
@@ -26,7 +28,8 @@ export default function SchoolCards(props) {
         const results = await api.getCovidSchool(localStore.codeSchool);
         setInfoCard(results);
       } catch (error) {
-        throw error;
+        console.log(error);
+        setError(error);
       }
     })();
   }, [localStore.codeSchool]);
@@ -38,6 +41,11 @@ export default function SchoolCards(props) {
   return (
     <>
       <Layout />
+      {/* {error || infoCard.estat === undefined ? (
+        <p className="p_error">
+          No se ha podido mostrar los datos. Inténtelo más tarde
+        </p>
+      ) : null} */}
       {localStore && (
         <div className="schoolmain">
           <div className="headers">
@@ -153,7 +161,7 @@ export default function SchoolCards(props) {
                           </pre>
                         </div>
                         <div>
-                          <p className="little_title">Docentes, PAS y PAES</p>
+                          <p className="little_title">Docentes, PAS i PAES</p>
                           <pre className="little_word_school">
                             <span className="little_number">
                               {infoCard.personal_positiu_vig11}
@@ -188,7 +196,7 @@ export default function SchoolCards(props) {
                           </pre>
                         </div>
                         <div>
-                          <p className="little_title">Docentes, PAS y PAES</p>
+                          <p className="little_title">Docentes, PAS i PAES</p>
                           <pre className="little_word_school">
                             <span className="little_number">
                               {infoCard.personal_positiu_acum}
@@ -209,6 +217,7 @@ export default function SchoolCards(props) {
                 </div>
                 <Map localstore={localStore} />
               </div>
+              <RegionSchools school={localStore} />
             </>
           )}
         </div>

@@ -1,0 +1,68 @@
+.mytable {
+  width: 100%;
+  border: 2px solid #0099ff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+/* thead {
+  display: flex;
+  flex: 0 0 auto;
+  margin: 20px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+} */
+thead td{
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0px;
+  text-align: left;
+  table-layout: fixed;
+}  
+/* th {
+  margin-left: 15px;
+} */
+/* th span {
+  display: flex;
+  flex-direction: row;  
+}  */
+/* .numbers {
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+} */
+
+/* .descending .ascending{
+  flex-direction: row;
+  vertical-align: baseline;
+  margin-left: 15px;
+} */
+td.ascending { 
+  padding-right: 0px;
+  content:"\25BC";
+} 
+
+td.ascending::after {
+  padding-right: 0px;
+  content:"\25BC";
+}
+
+td.descending {
+  content: '\25B2';
+} 
+
+td.descending::after {
+  content: '\25B2';
+} 
+
+/* thead th.ascendingname::after {
+  content: '👇';
+  margin-left: 1em;
+  width: 450px;
+}
+thead th.descendingname::after {
+  content: '☝️';
+  margin-left: 1em;
+  width: 450px;
+} */

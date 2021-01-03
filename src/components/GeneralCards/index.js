@@ -6,13 +6,15 @@ import Layout from "components/Layout";
 
 export default function GeneralCards() {
   const [infoCard, setInfoCard] = useState({});
+  const [error, setError] = useState(false);
   useEffect(() => {
     (async () => {
       try {
         const results = await api.getCovidAllSchools();
         setInfoCard(results);
       } catch (error) {
-        throw error;
+        console.log(error);
+        setError(error);
       }
     })();
   }, []);
@@ -20,7 +22,12 @@ export default function GeneralCards() {
   return (
     <>
       <Layout />
-      {infoCard && (
+      {error ? (
+        <p className="p_error">
+          No se ha podido mostrar los datos. Inténtelo más tarde
+        </p>
+      ) : null}
+      {infoCard ? (
         <div className="main">
           <h2>Situación centros educativos en Catalunya</h2>
           <p className="update">
@@ -149,8 +156,8 @@ export default function GeneralCards() {
           </div>
           <p className="note">**valores aproximados</p>
         </div>
-      )}
-      <RegionMap infoCard={infoCard} />
+      ) : null}
+      {infoCard ? <RegionMap infoCard={infoCard} /> : null}
     </>
   );
 }
