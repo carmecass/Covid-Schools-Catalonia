@@ -7,6 +7,4 @@
 
 ## Vídeo Demo
 
-[![Video Demo](https://img.youtube.com/vi/XtlTjKHew50/0.jpg)](https://www.youtube.com/watch?v=XtlTjKHew50)
-
-https://youtu.be/XtlTjKHew50
+[![Video Demo](https://img.youtube.com/vi/hskEsCO9dUE/0.jpg)](https://www.youtube.com/watch?v=hskEsCO9dUE)

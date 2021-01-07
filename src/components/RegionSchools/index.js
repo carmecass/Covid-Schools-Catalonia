@@ -151,7 +151,6 @@ export default function RegionSchools({
                 </thead>
               </table>
             </th>
-            {/* <div className="amagat">&#x25B2;</div> */}
           </tr>
         </thead>
         {infoRegionSchools && initialPage ? (

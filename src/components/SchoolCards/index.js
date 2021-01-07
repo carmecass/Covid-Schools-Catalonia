@@ -41,11 +41,11 @@ export default function SchoolCards(props) {
   return (
     <>
       <Layout />
-      {/* {error || infoCard.estat === undefined ? (
+      {error || infoCard.estat === undefined ? (
         <p className="p_error">
           No se ha podido mostrar los datos. Inténtelo más tarde
         </p>
-      ) : null} */}
+      ) : null}
       {localStore && (
         <div className="schoolmain">
           <div className="headers">

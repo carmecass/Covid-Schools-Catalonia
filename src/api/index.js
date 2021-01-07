@@ -348,6 +348,11 @@ const api = {
         const covidSchool = results.find(
           ({ codcentre }) => school.codcentre === codcentre
         );
+        if (covidSchool.estat === "Confinat") {
+          covidSchool.estat = "Confinado";
+        } else if (covidSchool.estat === "Obert") {
+          covidSchool.estat = "Abierto";
+        }
         return {
           ...school,
           estat: covidSchool.estat,
